@@ -15,9 +15,6 @@ import java.util.Scanner;
  */
 public class CzinkocziKifejezesekKiertekelese {
 
-    /**
-     * @param args the command line arguments
-     */
     private ArrayList<String> verem;
     private HashMap<Character, Integer> prece;
 
@@ -78,8 +75,45 @@ public class CzinkocziKifejezesekKiertekelese {
 
         return lengyelforma;
     }
+    
+    
+    private void kiszamitas(ArrayList<String> lengyelForma) {
+        while(lengyelForma.size() > 0){
+            String elem = lengyelForma.get(0);
+            if (elem instanceof Integer) {
+                verem.add(elem);
+            }
+            if (elem instanceof String) {
+                String muvelet = ;
+                int ertek1 = Integer.parseInt(verem.get(0));
+                int ertek2 = Integer.parseInt(verem.get(1));
+                double eredmeny = kiszamol(ertek2, muvelet, ertek1);
+                verem.add(eredmeny);
+            }
+        }
+        double vegeredmeny = Double.parseDouble(verem.get(0));
+        System.out.println(vegeredmeny);
+    }
+
+    private double kiszamol(int ertek2, String muvelet, int ertek1) {
+        double osszeg = 0;
+        if (muvelet.equals("+")) {
+            osszeg = ertek2 + ertek1;
+        }
+        if (muvelet.equals("-")) {
+            osszeg = ertek2 - ertek1;
+        }
+        if (muvelet.equals("*")) {
+            osszeg = ertek2 * ertek1;
+        }
+        if (muvelet.equals("/")) {
+            osszeg =  ertek2 / ertek1;
+        }
+        return osszeg;
+    }
 
     public static void main(String[] args) {
+
 
     }
 
