@@ -5,6 +5,10 @@
  */
 package czinkoczikifejezesekkiertekelese;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
 /**
  *
  * @author Nami
@@ -14,8 +18,69 @@ public class CzinkocziKifejezesekKiertekelese {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    private ArrayList<String> verem;
+    private HashMap<Character, Integer> prece;
+
+    public CzinkocziKifejezesekKiertekelese() {
+        init();
     }
-    
+
+    private void init() {
+        verem = new ArrayList<>();
+        prece = new HashMap<>();
+        prece.put('*', 2);
+        prece.put('/', 2);
+        prece.put('+', 1);
+        prece.put('-', 1);
+        prece.put('(', 0);
+        prece.put(')', 0);
+    }
+
+    private ArrayList<String> lengyelFormaraHozas() {
+        ArrayList<String> lengyelforma = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        String kifejezes = sc.nextLine();
+        char aktElem;
+        int i = 0;
+        while (i < kifejezes.length()) {
+            aktElem = kifejezes.charAt(i);
+            if (aktElem == '(') {
+                verem.add(aktElem + "");
+            } else if (aktElem == '*' || aktElem == '/' || aktElem == '-' || aktElem == '+') {
+                if (!verem.isEmpty()) {
+                    verem.add(aktElem + "");
+                } else {
+                    while (!verem.isEmpty()) {
+                        int j = 0;
+                        while (j < prece.size() && prece.containsKey(verem.get(verem.size() - 1))) {
+                            j++;
+                        }
+                        int veremPrec = prece.get(j).intValue();
+                        if (veremPrec >= prece.get(aktElem).intValue()) {
+                            lengyelforma.add(verem.get(verem.size() - 1));
+                            verem.remove(verem.size() - 1);
+                        }
+                    }
+                    verem.add(aktElem + "");
+                }
+            } else if (aktElem == ')') {
+                int k = verem.size();
+                while (!verem.get(k).equals('(')) {
+                    lengyelforma.add(verem.get(k));
+                    verem.remove(k);
+                    k--;
+                }
+            } else {
+                lengyelforma.add(aktElem + "");
+            }
+
+        }
+
+        return lengyelforma;
+    }
+
+    public static void main(String[] args) {
+
+    }
+
 }
