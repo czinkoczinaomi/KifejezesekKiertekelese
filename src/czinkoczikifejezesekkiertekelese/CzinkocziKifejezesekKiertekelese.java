@@ -70,9 +70,12 @@ public class CzinkocziKifejezesekKiertekelese {
             } else {
                 lengyelforma.add(aktElem + "");
             }
-
+            
         }
-
+        while (verem.size() > 0) {            
+            lengyelforma.add(verem.get(verem.size()-1));
+            verem.remove(verem.size()-1);
+        }
         return lengyelforma;
     }
 
