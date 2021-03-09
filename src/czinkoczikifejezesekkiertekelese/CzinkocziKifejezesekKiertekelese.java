@@ -77,36 +77,36 @@ public class CzinkocziKifejezesekKiertekelese {
     }
     
     
-    private void kiszamitas(ArrayList<String> lengyelForma) {
+    private double kiszamitas(ArrayList<String> lengyelForma) {     
         while(lengyelForma.size() > 0){
-            String elem = lengyelForma.get(0);
-            if (elem instanceof Integer) {
-                verem.add(elem);
+            char elem = lengyelForma.get(0).charAt(0);
+            if (!(elem == '+' || elem == '-'|| elem == '/' || elem == '*')) {
+                verem.add(elem+"");
             }
-            if (elem instanceof String) {
-                String muvelet = ;
-                int ertek1 = Integer.parseInt(verem.get(0));
-                int ertek2 = Integer.parseInt(verem.get(1));
-                double eredmeny = kiszamol(ertek2, muvelet, ertek1);
-                verem.add(eredmeny);
+            if (elem == '+' || elem == '-'|| elem == '/' || elem == '*') {
+                double ertek1 = Double.parseDouble(verem.get(0));
+                double ertek2 = Double.parseDouble(verem.get(1));
+                double eredmeny = kiszamol(ertek2, elem, ertek1);
+                verem.add(eredmeny+"");
             }
         }
         double vegeredmeny = Double.parseDouble(verem.get(0));
         System.out.println(vegeredmeny);
+        return vegeredmeny;
     }
 
-    private double kiszamol(int ertek2, String muvelet, int ertek1) {
+    private double kiszamol(double ertek2, char elem, double ertek1) {
         double osszeg = 0;
-        if (muvelet.equals("+")) {
+        if (elem == '+') {
             osszeg = ertek2 + ertek1;
         }
-        if (muvelet.equals("-")) {
+        if (elem == '-') {
             osszeg = ertek2 - ertek1;
         }
-        if (muvelet.equals("*")) {
+        if (elem == '/') {
             osszeg = ertek2 * ertek1;
         }
-        if (muvelet.equals("/")) {
+        if (elem == '*') {
             osszeg =  ertek2 / ertek1;
         }
         return osszeg;
