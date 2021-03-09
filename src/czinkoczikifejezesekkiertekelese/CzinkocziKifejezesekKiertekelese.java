@@ -70,7 +70,7 @@ public class CzinkocziKifejezesekKiertekelese {
             } else {
                 lengyelforma.add(aktElem + "");
             }
-            
+            i++;
         }
         while (verem.size() > 0) {            
             lengyelforma.add(verem.get(verem.size()-1));
