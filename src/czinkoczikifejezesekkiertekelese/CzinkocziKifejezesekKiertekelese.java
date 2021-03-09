@@ -75,19 +75,18 @@ public class CzinkocziKifejezesekKiertekelese {
 
         return lengyelforma;
     }
-    
-    
-    private double kiszamitas(ArrayList<String> lengyelForma) {     
-        while(lengyelForma.size() > 0){
+
+    private double kiszamitas(ArrayList<String> lengyelForma) {
+        while (lengyelForma.size() > 0) {
             char elem = lengyelForma.get(0).charAt(0);
-            if (!(elem == '+' || elem == '-'|| elem == '/' || elem == '*')) {
-                verem.add(elem+"");
+            if (!(elem == '+' || elem == '-' || elem == '/' || elem == '*')) {
+                verem.add(elem + "");
             }
-            if (elem == '+' || elem == '-'|| elem == '/' || elem == '*') {
+            if (elem == '+' || elem == '-' || elem == '/' || elem == '*') {
                 double ertek1 = Double.parseDouble(verem.get(0));
                 double ertek2 = Double.parseDouble(verem.get(1));
                 double eredmeny = kiszamol(ertek2, elem, ertek1);
-                verem.add(eredmeny+"");
+                verem.add(eredmeny + "");
             }
         }
         double vegeredmeny = Double.parseDouble(verem.get(0));
@@ -107,14 +106,14 @@ public class CzinkocziKifejezesekKiertekelese {
             osszeg = ertek2 * ertek1;
         }
         if (elem == '*') {
-            osszeg =  ertek2 / ertek1;
+            osszeg = ertek2 / ertek1;
         }
         return osszeg;
     }
 
     public static void main(String[] args) {
-
-
+        CzinkocziKifejezesekKiertekelese program = new CzinkocziKifejezesekKiertekelese();
+        program.kiszamitas(program.lengyelFormaraHozas());
     }
 
 }
