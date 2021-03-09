@@ -31,31 +31,36 @@ public class CzinkocziKifejezesekKiertekelese {
         prece.put('-', 1);
         prece.put('(', 0);
         prece.put(')', 0);
+        
+//        kiszamitas(lengyelFormaraHozas());
     }
 
     private ArrayList<String> lengyelFormaraHozas() {
         ArrayList<String> lengyelforma = new ArrayList<>();
+        System.out.println("Adjon meg egy matematikai kifejezést!");
         Scanner sc = new Scanner(System.in);
         String kifejezes = sc.nextLine();
         char aktElem;
+        
         int i = 0;
         while (i < kifejezes.length()) {
             aktElem = kifejezes.charAt(i);
+            System.out.println("valami");
             if (aktElem == '(') {
                 verem.add(aktElem + "");
+                 
             } else if (aktElem == '*' || aktElem == '/' || aktElem == '-' || aktElem == '+') {
-                if (!verem.isEmpty()) {
+                if (verem.isEmpty()) {
                     verem.add(aktElem + "");
                 } else {
                     while (!verem.isEmpty()) {
                         int j = 0;
-                        while (j < prece.size() && prece.containsKey(verem.get(verem.size() - 1))) {
-                            j++;
-                        }
-                        int veremPrec = prece.get(j).intValue();
+                        int veremPrec = prece.get(verem.get(verem.size() - 1).charAt(0));
+//                        System.out.println(prece.get(j).intValue());
                         if (veremPrec >= prece.get(aktElem).intValue()) {
                             lengyelforma.add(verem.get(verem.size() - 1));
                             verem.remove(verem.size() - 1);
+                            
                         }
                     }
                     verem.add(aktElem + "");
@@ -69,28 +74,37 @@ public class CzinkocziKifejezesekKiertekelese {
                 }
             } else {
                 lengyelforma.add(aktElem + "");
+                
             }
             i++;
+
         }
-        while (verem.size() > 0) {            
+       while (verem.size() > 0) {            
             lengyelforma.add(verem.get(verem.size()-1));
             verem.remove(verem.size()-1);
         }
+        System.out.println(lengyelforma);
+      
         return lengyelforma;
     }
 
     private double kiszamitas(ArrayList<String> lengyelForma) {
+        //int i=lengyelForma.size();
         while (lengyelForma.size() > 0) {
             char elem = lengyelForma.get(0).charAt(0);
+            lengyelForma.remove(0);
             if (!(elem == '+' || elem == '-' || elem == '/' || elem == '*')) {
                 verem.add(elem + "");
             }
             if (elem == '+' || elem == '-' || elem == '/' || elem == '*') {
-                double ertek1 = Double.parseDouble(verem.get(0));
-                double ertek2 = Double.parseDouble(verem.get(1));
+                double ertek1 = Double.parseDouble(verem.get(verem.size()-1));
+                double ertek2 = Double.parseDouble(verem.get(verem.size()-2));
+                verem.remove(verem.get(verem.size()-1));
+                verem.remove(verem.get(verem.size()-1));
                 double eredmeny = kiszamol(ertek2, elem, ertek1);
                 verem.add(eredmeny + "");
             }
+            //i--;
         }
         double vegeredmeny = Double.parseDouble(verem.get(0));
         System.out.println(vegeredmeny);
