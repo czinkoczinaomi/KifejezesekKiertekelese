@@ -45,7 +45,7 @@ public class CzinkocziKifejezesekKiertekelese {
         int i = 0;
         while (i < kifejezes.length()) {
             aktElem = kifejezes.charAt(i);
-            System.out.println("valami");
+//            System.out.println("valami");
             if (aktElem == '(') {
                 verem.add(aktElem + "");
                  
